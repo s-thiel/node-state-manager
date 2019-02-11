@@ -22,11 +22,11 @@ class StateManager {
         if(!path)
             throw new Error('No path specified in config');
 
-        let state = await fsPromises.readFile(path, {
+        let file = await fsPromises.readFile(path, {
             encoding: 'utf8'
         });
 
-        let state = JSON.parse(state);
+        let state = JSON.parse(file);
         this[STATE] = Object.assign(this[STATE], state);
 
     }
