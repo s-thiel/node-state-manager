@@ -68,6 +68,9 @@ class StateManager {
         if(shouldUpdate) {
             this[STATE] = stateToUpdate;
 
+            if(this.config.path)
+                await this.saveState();
+
             if (this.stateDidUpdate)
                 this.stateDidUpdate(this[STATE], stateToUpdate);
         }
