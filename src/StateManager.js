@@ -80,7 +80,8 @@ class StateManager {
      * Return the state for variable .state
      */
     get state() {
-        return this[STATE];
+        let state = this.copy(this[STATE]);
+        return state;
     }
 
     /**
@@ -96,6 +97,22 @@ class StateManager {
         this.config.initialStateSet = true;
         this[STATE] = newState;
     }
+
+    /**
+     * http://526avijitgupta.github.io/deep-copying-in-JS-!/
+     * 
+     * @param {Object} o 
+     */
+    copy(o) {
+        var output, v, key;
+        output = Array.isArray(o) ? [] : {};
+        for (key in o) {
+            v = o[key];
+            output[key] = (typeof v === "object") ? copy(v) : v;
+        }
+        return output;
+     }
+
 }
 
 module.exports = StateManager;
